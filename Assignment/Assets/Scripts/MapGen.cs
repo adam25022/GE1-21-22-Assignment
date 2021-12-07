@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MapGen : MonoBehaviour 
-{
+public class MapGen : MonoBehaviour {
 
-	public enum DrawMode {NoiseMap, ColorMap};
+	public enum DrawMode {NoiseMap, ColorMap, Mesh};
 	public DrawMode drawMode;
 
 	public int Width;
@@ -23,20 +22,15 @@ public class MapGen : MonoBehaviour
 
 	public TerrainType[] regions;
 
-	public void GenerateMap() 
-	{
+	public void GenerateMap() {
 		float[,] NoiseMap = Noise.GenerateNoiseMap (Width, Height, Seed, noiseScale, Octaves, Persistance, Lacunarity, Offset);
 
 		Color[] ColorMap = new Color[Width * Height];
-		for (int y = 0; y < Height; y++) 
-		{
-			for (int x = 0; x < Width; x++) 
-			{
+		for (int y = 0; y < Height; y++) {
+			for (int x = 0; x < Width; x++) {
 				float CurrentHeight = NoiseMap [x, y];
-				for (int i = 0; i < regions.Length; i++) 
-				{
-					if (CurrentHeight <= regions [i].Height) 
-					{
+				for (int i = 0; i < regions.Length; i++) {
+					if (CurrentHeight <= regions [i].Height) {
 						ColorMap [y * Width + x] = regions [i].Color;
 						break;
 					}
@@ -45,39 +39,33 @@ public class MapGen : MonoBehaviour
 		}
 
 		MapDisplay display = FindObjectOfType<MapDisplay> ();
-		if (drawMode == DrawMode.NoiseMap) 
-		{
-			display.CreateTexture (TextureGenerator.TextureFromHeightMap(NoiseMap));
-		} else if (drawMode == DrawMode.ColorMap) 
-		{
-			display.CreateTexture (TextureGenerator.TextureFromColorMap(ColorMap, Width, Height));
+		if (drawMode == DrawMode.NoiseMap) {
+			display.CreateTexture (TextureGenerator.TextureFromHeightMap (NoiseMap));
+		} else if (drawMode == DrawMode.ColorMap) {
+			display.CreateTexture (TextureGenerator.TextureFromColorMap (ColorMap, Width, Height));
+		} else if (drawMode == DrawMode.Mesh) {
+			display.CreateMesh (MeshGenerator.GenerateTerrainMesh (NoiseMap), TextureGenerator.TextureFromColorMap (ColorMap, Width, Height));
 		}
 	}
 
-	void OnValidate() 
-	{
-		if (Width < 1) 
-		{
+	void OnValidate() {
+		if (Width < 1) {
 			Width = 1;
 		}
-		if (Height < 1) 
-		{
+		if (Height < 1) {
 			Height = 1;
 		}
-		if (Lacunarity < 1) 
-		{
+		if (Lacunarity < 1) {
 			Lacunarity = 1;
 		}
-		if (Octaves < 0) 
-		{
+		if (Octaves < 0) {
 			Octaves = 0;
 		}
 	}
 }
 
 [System.Serializable]
-public struct TerrainType 
-{
+public struct TerrainType {
 	public string Name;
 	public float Height;
 	public Color Color;
