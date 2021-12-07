@@ -215,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 692420822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 125, y: 1, z: 125}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -229,8 +229,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1563292647}
-  - component: {fileID: 1563292645}
   - component: {fileID: 1563292646}
+  - component: {fileID: 1563292645}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -247,10 +247,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 1563292644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2455ca68b6881d94781b323d4941f5d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 99bbd286a69742d4687fb82f711cdd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureRender: {fileID: 692420824}
+  drawMode: 1
+  Width: 100
+  Height: 100
+  noiseScale: 25
+  Octaves: 5
+  Persistance: 0.5
+  Lacunarity: 25
+  Seed: 0
+  Offset: {x: 0, y: 0}
+  autoUpdate: 0
+  regions:
+  - Name: Water
+    Height: 0.1
+    Color: {r: 0.16470589, g: 0.36078432, b: 0.7411765, a: 0}
+  - Name: Water 2
+    Height: 0.2
+    Color: {r: 0.21176472, g: 0.4039216, b: 0.7803922, a: 0}
+  - Name: Beach
+    Height: 0.3
+    Color: {r: 0.8235295, g: 0.81568635, b: 0.4901961, a: 0}
+  - Name: Grass
+    Height: 0.4
+    Color: {r: 0.3372549, g: 0.59607846, b: 0.09019608, a: 0}
+  - Name: Grass2
+    Height: 0.6
+    Color: {r: 0.24313727, g: 0.41960788, b: 0.07058824, a: 0}
+  - Name: Grass 3
+    Height: 0.7
+    Color: {r: 0.3529412, g: 0.27058825, b: 0.23529413, a: 0}
+  - Name: Mountian1
+    Height: 0.8
+    Color: {r: 0.29411766, g: 0.23529413, b: 0.20784315, a: 0}
+  - Name: Nountian2
+    Height: 1
+    Color: {r: 0.29411766, g: 0.23529413, b: 0.20784315, a: 0}
 --- !u!114 &1563292646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,18 +294,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1563292644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99bbd286a69742d4687fb82f711cdd04, type: 3}
+  m_Script: {fileID: 11500000, guid: 2455ca68b6881d94781b323d4941f5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 125
-  Height: 125
-  noiseScale: 25
-  Octaves: 4
-  Persistance: 0.5
-  Lacunarity: 2
-  Seed: 25
-  Offset: {x: 13.4, y: 6.26}
-  autoUpdate: 1
+  MapTextureRenderer: {fileID: 692420824}
 --- !u!4 &1563292647
 Transform:
   m_ObjectHideFlags: 0
