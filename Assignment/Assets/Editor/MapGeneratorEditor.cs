@@ -2,13 +2,13 @@
 using System.Collections;
 using UnityEditor;
 
-[CustomEditor (typeof (MapGenerator))]
+[CustomEditor (typeof (MapGen))]
 public class MapGeneratorEditor : Editor 
 {
 
 	public override void OnInspectorGUI() 
 	{
-		MapGenerator mapGen = (MapGenerator)target;
+		MapGen mapGen = (MapGen)target;
 
 		if (DrawDefaultInspector ()) 
 		{
