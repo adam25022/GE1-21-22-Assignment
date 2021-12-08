@@ -4,6 +4,8 @@ using System.Collections;
 public class MapDisplay : MonoBehaviour {
 
 	public Renderer MapTextureRenderer;
+	public Renderer SkyTextureRenderer;
+
 	public MeshFilter MapMeshFilter;
 	public MeshRenderer MapMeshRenderer;
 
@@ -11,6 +13,7 @@ public class MapDisplay : MonoBehaviour {
 		MapTextureRenderer.sharedMaterial.mainTexture = texture;
 		MapTextureRenderer.transform.localScale = new Vector3 (texture.width, 1, texture.height);
 	}
+
 
 	public void CreateMesh(MeshData meshData, Texture2D texture) {
 		MapMeshFilter.sharedMesh = meshData.CreateMesh ();

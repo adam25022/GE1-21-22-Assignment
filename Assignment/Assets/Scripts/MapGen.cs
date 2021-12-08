@@ -3,10 +3,10 @@ using System.Collections;
 
 public class MapGen : MonoBehaviour {
 
-	public enum DrawMode {NoiseMap, ColorMap, Mesh};
+	public enum DrawMode {NoiseMap, Sky, Mesh, FalloffMap};
 	public DrawMode drawMode;
 
-	const int MapChunkSize = 241;
+	const int MapChunkSize = 25;
 	[Range(0,6)]
 	public int levelOfDetail;
 	public float noiseScale;
@@ -23,9 +23,9 @@ public class MapGen : MonoBehaviour {
 	public AnimationCurve MeshHeightCurveAmmount;
 
 	public bool autoUpdate;
-
+	float[,] falloffMap;
 	public TerrainType[] regions;
-
+	
 	public void GenerateMap() {
 		float[,] NoiseMap = Noise.GenerateNoiseMap (MapChunkSize, MapChunkSize, Seed, noiseScale, Octaves, Persistance, Lacunarity, Offset);
 
@@ -47,6 +47,8 @@ public class MapGen : MonoBehaviour {
 			Display.CreateTexture (TextureGenerator.TextureFromHeightMap (NoiseMap));
 		} else if (drawMode == DrawMode.Mesh) {
 			Display.CreateMesh (MeshGenerator.GenerateTerrainMesh (NoiseMap, MeshHeightChanger, MeshHeightCurveAmmount, levelOfDetail), TextureGenerator.TextureFromColorMap (ColorMap, MapChunkSize, MapChunkSize));
+		} else if (drawMode == DrawMode.FalloffMap) {
+			Display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(MapChunkSize)));
 		}
 	}
 

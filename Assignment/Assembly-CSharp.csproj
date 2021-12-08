@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\MapGen.cs" />
     <Compile Include="Assets\Scripts\TextureGenerator.cs" />
     <Compile Include="Assets\Scripts\MeshGenetator.cs" />
+    <Compile Include="Assets\Scripts\FallOffMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
