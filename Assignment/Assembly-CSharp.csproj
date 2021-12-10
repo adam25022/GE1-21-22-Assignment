@@ -61,6 +61,8 @@
     <Compile Include="Assets\Scripts\Generation\TextureGenerator.cs" />
     <Compile Include="Assets\Scripts\Generation\SkyDisplay.cs" />
     <Compile Include="Assets\Scripts\Generation\MeshGenetator.cs" />
+    <Compile Include="Assets\Scripts\Movement\RigidbodyFirstPersonController.cs" />
+    <Compile Include="Assets\Scripts\Movement\MouseLook.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
