@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SkyGen : MonoBehaviour {
 
-	public enum DrawMode {NoiseMap, ColorMap, FalloffMap};
+	public enum DrawMode {NoiseMap, SkyMap, FalloffMap};
 	public DrawMode drawMode;
 
 	public Noise.NormalizeMode normalizeMode;
@@ -23,7 +23,7 @@ public class SkyGen : MonoBehaviour {
 
 	public bool useFalloff;
 
-	
+	int frames=0;
 	public bool autoUpdate;
 
 	public TerrainType[] regions;
@@ -39,8 +39,8 @@ public class SkyGen : MonoBehaviour {
 		SkyDisplay Display = FindObjectOfType<SkyDisplay> ();
 		if (drawMode == DrawMode.NoiseMap) {
 			Display.CreateTexture (TextureGenerator.TextureFromHeightMap (skyData.heightMap));
-		} else if (drawMode == DrawMode.ColorMap) {
-			Display.CreateTexture (TextureGenerator.TextureFromColorMap (skyData.ColorMap, MapChunkSize, MapChunkSize));
+		} else if (drawMode == DrawMode.SkyMap) {
+			Display.CreateTexture (TextureGenerator.TextureFromColorMap (skyData.SkyMap, MapChunkSize, MapChunkSize));
 		} else if (drawMode == DrawMode.FalloffMap) {
 			Display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(MapChunkSize)));
 		}
@@ -49,7 +49,7 @@ public class SkyGen : MonoBehaviour {
 	SkyData GenerateSkyData(Vector2 centre) {
 		float[,] NoiseMap = Noise.GenerateNoiseMap (MapChunkSize, MapChunkSize, Seed, noiseScale, Octaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
 
-		Color[] ColorMap = new Color[MapChunkSize * MapChunkSize];
+		Color[] SkyMap = new Color[MapChunkSize * MapChunkSize];
 		for (int y = 0; y < MapChunkSize; y++) {
 			for (int x = 0; x < MapChunkSize; x++) {
 				if (useFalloff) {
@@ -58,7 +58,7 @@ public class SkyGen : MonoBehaviour {
 				float CurrentHeight = NoiseMap [x, y];
 				for (int i = 0; i < regions.Length; i++) {
 					if (CurrentHeight >= regions [i].Height) {
-						ColorMap [y * MapChunkSize + x] = regions [i].Color;
+						SkyMap [y * MapChunkSize + x] = regions [i].Color;
 					} else {
 						break;
 					}
@@ -67,7 +67,7 @@ public class SkyGen : MonoBehaviour {
 		}
 
 
-		return new SkyData (NoiseMap, ColorMap);
+		return new SkyData (NoiseMap, SkyMap);
 	}
 
 	void OnValidate() {
@@ -81,23 +81,26 @@ public class SkyGen : MonoBehaviour {
 		falloffMap = FallOffMap.GenerateFalloffMap (MapChunkSize);
 	}
 
-	void Update()
-    {
-		
-        OffsetUpdate=OffsetUpdate+0.05f;
+	void LateUpdate()
+    {	
+		frames++;
+        OffsetUpdate=OffsetUpdate+0.02f;
 		Offset.Set(OffsetUpdate, 0);
-		DrawMapInEditor ();
+		if(frames%3==0)
+		{
+			DrawMapInEditor ();
+		}
     }
 }
 
 public struct SkyData {
 	public readonly float[,] heightMap;
-	public readonly Color[] ColorMap;
+	public readonly Color[] SkyMap;
 
-	public SkyData (float[,] heightMap, Color[] ColorMap)
+	public SkyData (float[,] heightMap, Color[] SkyMap)
 	{
 		this.heightMap = heightMap;
-		this.ColorMap = ColorMap;
+		this.SkyMap = SkyMap;
 	}
 }
 
