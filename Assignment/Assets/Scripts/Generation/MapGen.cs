@@ -3,66 +3,58 @@ using System.Collections;
 
 public class MapGen : MonoBehaviour {
 
-	public enum DrawMode {NoiseMap, ColorMap, Mesh, FalloffMap};
+	public enum DrawMode {PerlinNoise, WorldMap, Mesh, FalloffMap};
 	public DrawMode drawMode;
-
 	public Noise.NormalizeMode normalizeMode;
-
-	public const int MapChunkSize = 241;
-	[Range(0,6)]
+	
+	public int SizeOfMap;
+	[Range(0,10)]
 	public int editorPreviewLOD;
 	public float noiseScale;
-
 	public int Octaves;
 	[Range(0,1)]
 	public float Persistance;
 	public float Lacunarity;
-
 	public int Seed;
 	public Vector2 Offset;
-
 	public bool useFalloff;
-
 	public float MeshHeightChanger;
 	public AnimationCurve MeshHeightCurveAmmount;
-
 	public bool autoUpdate;
-
 	public TerrainType[] regions;
-
 	float[,] falloffMap;
 	void Awake() {
-		falloffMap = FallOffMap.GenerateFalloffMap (MapChunkSize);
+		falloffMap = FallOffMap.GenerateFalloffMap (SizeOfMap);
 	}
 
 	public void DrawMapInEditor() {
 		MapData mapData = GenerateMapData (Vector2.zero);
 
 		MapDisplay Display = FindObjectOfType<MapDisplay> ();
-		if (drawMode == DrawMode.NoiseMap) {
+		if (drawMode == DrawMode.PerlinNoise) {
 			Display.CreateTexture (TextureGenerator.TextureFromHeightMap (mapData.heightMap));
-		} else if (drawMode == DrawMode.ColorMap) {
-			Display.CreateTexture (TextureGenerator.TextureFromColorMap (mapData.ColorMap, MapChunkSize, MapChunkSize));
+		} else if (drawMode == DrawMode.WorldMap) {
+			Display.CreateTexture (TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
 		} else if (drawMode == DrawMode.Mesh) {
-			Display.CreateMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, MeshHeightChanger, MeshHeightCurveAmmount, editorPreviewLOD), TextureGenerator.TextureFromColorMap (mapData.ColorMap, MapChunkSize, MapChunkSize));
+			Display.CreateMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, MeshHeightChanger, MeshHeightCurveAmmount, editorPreviewLOD), TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
 		} else if (drawMode == DrawMode.FalloffMap) {
-			Display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(MapChunkSize)));
+			Display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(SizeOfMap)));
 		}
 	}
 
 	MapData GenerateMapData(Vector2 centre) {
-		float[,] NoiseMap = Noise.GenerateNoiseMap (MapChunkSize, MapChunkSize, Seed, noiseScale, Octaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
+		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfMap, SizeOfMap, Seed, noiseScale, Octaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
 
-		Color[] ColorMap = new Color[MapChunkSize * MapChunkSize];
-		for (int y = 0; y < MapChunkSize; y++) {
-			for (int x = 0; x < MapChunkSize; x++) {
+		Color[] WorldMap = new Color[SizeOfMap * SizeOfMap];
+		for (int y = 0; y < SizeOfMap; y++) {
+			for (int x = 0; x < SizeOfMap; x++) {
 				if (useFalloff) {
-					NoiseMap [x, y] = Mathf.Clamp01(NoiseMap [x, y] - falloffMap [x, y]);
+					PerlinNoise [x, y] = Mathf.Clamp01(PerlinNoise [x, y] - falloffMap [x, y]);
 				}
-				float CurrentHeight = NoiseMap [x, y];
+				float CurrentHeight = PerlinNoise [x, y];
 				for (int i = 0; i < regions.Length; i++) {
 					if (CurrentHeight >= regions [i].Height) {
-						ColorMap [y * MapChunkSize + x] = regions [i].Color;
+						WorldMap [y * SizeOfMap + x] = regions [i].Color;
 					} else {
 						break;
 					}
@@ -71,7 +63,7 @@ public class MapGen : MonoBehaviour {
 		}
 
 
-		return new MapData (NoiseMap, ColorMap);
+		return new MapData (PerlinNoise, WorldMap);
 	}
 
 	void OnValidate() {
@@ -82,7 +74,7 @@ public class MapGen : MonoBehaviour {
 			Octaves = 0;
 		}
 
-		falloffMap = FallOffMap.GenerateFalloffMap (MapChunkSize);
+		falloffMap = FallOffMap.GenerateFalloffMap (SizeOfMap);
 	}
 	void Start(){
 		DrawMapInEditor ();
@@ -99,11 +91,11 @@ public struct TerrainType {
 
 public struct MapData {
 	public readonly float[,] heightMap;
-	public readonly Color[] ColorMap;
+	public readonly Color[] WorldMap;
 
-	public MapData (float[,] heightMap, Color[] ColorMap)
+	public MapData (float[,] heightMap, Color[] WorldMap)
 	{
 		this.heightMap = heightMap;
-		this.ColorMap = ColorMap;
+		this.WorldMap = WorldMap;
 	}
 }

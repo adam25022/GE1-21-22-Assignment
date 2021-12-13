@@ -3,12 +3,12 @@ using System.Collections;
 
 public class SkyGen : MonoBehaviour {
 
-	public enum DrawMode {NoiseMap, SkyMap, FalloffMap};
+	public enum DrawMode {PerlinNoise, SkyMap, FalloffMap};
 	public DrawMode drawMode;
 
 	public Noise.NormalizeMode normalizeMode;
 
-	public const int MapChunkSize = 400;
+	public const int SizeOfMap = 400;
 	[Range(0,6)]
 	public int editorPreviewLOD;
 	public float noiseScale;
@@ -29,36 +29,37 @@ public class SkyGen : MonoBehaviour {
 	public TerrainType[] regions;
 
 	float[,] falloffMap;
+	
 	void Awake() {
-		falloffMap = FallOffMap.GenerateFalloffMap (MapChunkSize);
+		falloffMap = FallOffMap.GenerateFalloffMap (SizeOfMap);
 	}
 
 	public void DrawMapInEditor() {
 		SkyData skyData = GenerateSkyData (Vector2.zero);
 
 		SkyDisplay Display = FindObjectOfType<SkyDisplay> ();
-		if (drawMode == DrawMode.NoiseMap) {
+		if (drawMode == DrawMode.PerlinNoise) {
 			Display.CreateTexture (TextureGenerator.TextureFromHeightMap (skyData.heightMap));
 		} else if (drawMode == DrawMode.SkyMap) {
-			Display.CreateTexture (TextureGenerator.TextureFromColorMap (skyData.SkyMap, MapChunkSize, MapChunkSize));
+			Display.CreateTexture (TextureGenerator.TextureFromWorldMap (skyData.SkyMap, SizeOfMap, SizeOfMap));
 		} else if (drawMode == DrawMode.FalloffMap) {
-			Display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(MapChunkSize)));
+			Display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(SizeOfMap)));
 		}
 	}
 
 	SkyData GenerateSkyData(Vector2 centre) {
-		float[,] NoiseMap = Noise.GenerateNoiseMap (MapChunkSize, MapChunkSize, Seed, noiseScale, Octaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
+		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfMap, SizeOfMap, Seed, noiseScale, Octaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
 
-		Color[] SkyMap = new Color[MapChunkSize * MapChunkSize];
-		for (int y = 0; y < MapChunkSize; y++) {
-			for (int x = 0; x < MapChunkSize; x++) {
+		Color[] SkyMap = new Color[SizeOfMap * SizeOfMap];
+		for (int y = 0; y < SizeOfMap; y++) {
+			for (int x = 0; x < SizeOfMap; x++) {
 				if (useFalloff) {
-					NoiseMap [x, y] = Mathf.Clamp01(NoiseMap [x, y] - falloffMap [x, y]);
+					PerlinNoise [x, y] = Mathf.Clamp01(PerlinNoise [x, y] - falloffMap [x, y]);
 				}
-				float CurrentHeight = NoiseMap [x, y];
+				float CurrentHeight = PerlinNoise [x, y];
 				for (int i = 0; i < regions.Length; i++) {
 					if (CurrentHeight >= regions [i].Height) {
-						SkyMap [y * MapChunkSize + x] = regions [i].Color;
+						SkyMap [y * SizeOfMap + x] = regions [i].Color;
 					} else {
 						break;
 					}
@@ -67,7 +68,7 @@ public class SkyGen : MonoBehaviour {
 		}
 
 
-		return new SkyData (NoiseMap, SkyMap);
+		return new SkyData (PerlinNoise, SkyMap);
 	}
 
 	void OnValidate() {
@@ -78,7 +79,7 @@ public class SkyGen : MonoBehaviour {
 			Octaves = 0;
 		}
 
-		falloffMap = FallOffMap.GenerateFalloffMap (MapChunkSize);
+		falloffMap = FallOffMap.GenerateFalloffMap (SizeOfMap);
 	}
 
 	void LateUpdate()

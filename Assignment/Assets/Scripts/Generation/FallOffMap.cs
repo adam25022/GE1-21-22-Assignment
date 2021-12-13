@@ -2,21 +2,21 @@ using UnityEngine;
 using System.Collections;
 
 public static class FallOffMap {
+	
+	public static float[,] GenerateFalloffMap(int MapSize) {
+		float[,] FallOfMap = new float[MapSize,MapSize];
 
-	public static float[,] GenerateFalloffMap(int size) {
-		float[,] map = new float[size,size];
-
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				float x = i / (float)size * 2 - 1;
-				float y = j / (float)size * 2 - 1;
+		for (int Loop1 = 0; Loop1 < MapSize; Loop1++) {
+			for (int Loop2 = 0; Loop2 < MapSize; Loop2++) {
+				float x = Loop1 / (float)MapSize * 2 - 1;
+				float y = Loop2 / (float)MapSize * 2 - 1;
 
 				float value = Mathf.Max (Mathf.Abs (x), Mathf.Abs (y));
-				map [i, j] = Evaluate(value);
+				FallOfMap [Loop1, Loop2] = Evaluate(value);
 			}
 		}
 
-		return map;
+		return FallOfMap;
 	}
 
 	static float Evaluate(float value) {

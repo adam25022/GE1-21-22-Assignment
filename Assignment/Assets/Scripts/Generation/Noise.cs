@@ -6,7 +6,7 @@ public static class Noise {
 	public enum NormalizeMode {Local, Global};
 
 	public static float[,] GenerateNoiseMap(int Width, int Height, int Seed, float Scale, int Octaves, float Persistance, float Lacunarity, Vector2 Offset, NormalizeMode normalizeMode) {
-		float[,] NoiseMap = new float[Width,Height];
+		float[,] PerlinNoise = new float[Width,Height];
 
 		System.Random prng = new System.Random (Seed);
 		Vector2[] octaveOffsets = new Vector2[Octaves];
@@ -58,22 +58,22 @@ public static class Noise {
 				} else if (noiseHeight < minLocalNoiseHeight) {
 					minLocalNoiseHeight = noiseHeight;
 				}
-				NoiseMap [x, y] = noiseHeight;
+				PerlinNoise [x, y] = noiseHeight;
 			}
 		}
 
 		for (int y = 0; y < Height; y++) {
 			for (int x = 0; x < Width; x++) {
 				if (normalizeMode == NormalizeMode.Local) {
-					NoiseMap [x, y] = Mathf.InverseLerp (minLocalNoiseHeight, maxLocalNoiseHeight, NoiseMap [x, y]);
+					PerlinNoise [x, y] = Mathf.InverseLerp (minLocalNoiseHeight, maxLocalNoiseHeight, PerlinNoise [x, y]);
 				} else {
-					float normalizedHeight = (NoiseMap [x, y] + 1) / (maxPossibleHeight/0.9f);
-					NoiseMap [x, y] = Mathf.Clamp(normalizedHeight,0, int.MaxValue);
+					float normalizedHeight = (PerlinNoise [x, y] + 1) / (maxPossibleHeight/0.9f);
+					PerlinNoise [x, y] = Mathf.Clamp(normalizedHeight,0, int.MaxValue);
 				}
 			}
 		}
 
-		return NoiseMap;
+		return PerlinNoise;
 	}
 
 }
