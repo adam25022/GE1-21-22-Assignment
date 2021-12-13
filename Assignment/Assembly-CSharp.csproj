@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,7 +53,6 @@
     <UnityVersion>2021.1.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Generation\MapDisplay.cs" />
     <Compile Include="Assets\Scripts\Generation\Noise.cs" />
     <Compile Include="Assets\Scripts\Generation\MapGen.cs" />
     <Compile Include="Assets\Scripts\Generation\FallOffMap.cs" />
@@ -61,8 +60,8 @@
     <Compile Include="Assets\Scripts\Movement\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Movement\RigidbodyFirstPersonController.cs" />
     <Compile Include="Assets\Scripts\Generation\TextureGenerator.cs" />
-    <Compile Include="Assets\Scripts\Generation\SkyDisplay.cs" />
     <Compile Include="Assets\Scripts\Generation\MeshGenetator.cs" />
+    <Compile Include="Assets\Scripts\Generation\Display.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class MeshGenerator {
 
-	public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, AnimationCurve _heightCurve, int levelOfDetail) {
+	public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, AnimationCurve _heightCurve) {
 		AnimationCurve heightCurve = new AnimationCurve (_heightCurve.keys);
 
 		int width = heightMap.GetLength (0);
@@ -11,14 +11,14 @@ public static class MeshGenerator {
 		float topLeftX = (width - 1) / -2f;
 		float topLeftZ = (Height - 1) / 2f;
 
-		int MeshSimplification = (levelOfDetail == 0)?1:levelOfDetail * 2;
-		int verticesPerLine = (width - 1) / MeshSimplification + 1;
+
+		int verticesPerLine = (width - 1) ;
 
 		MeshData meshData = new MeshData (verticesPerLine, verticesPerLine);
 		int vertexIndex = 0;
 
-		for (int y = 0; y < Height; y += MeshSimplification) {
-			for (int x = 0; x < width; x += MeshSimplification) {
+		for (int y = 0; y < Height; y ++) {
+			for (int x = 0; x < width; x ++) {
 				meshData.vertices [vertexIndex] = new Vector3 (topLeftX + x, heightCurve.Evaluate (heightMap [x, y]) * heightMultiplier, topLeftZ - y);
 				meshData.uvs [vertexIndex] = new Vector2 (x / (float)width, y / (float)Height);
 
