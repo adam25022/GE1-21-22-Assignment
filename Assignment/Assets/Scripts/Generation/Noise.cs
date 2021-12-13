@@ -1,11 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// no reason to inherit from monobehavour since it doesnt give us anything.
+// only want 1 instance of this script so i make it static.
 public static class Noise {
 
 	public enum NormalizeMode {Local, Global};
 
+	//here we want a method to generate the noise map that we will be using.
+	// it will return a 2d array of values between 0 and 1, if the height and width are 10, it will return 100 in a 10x10 grid.
+	// we pass in the width and height, which is essentially the horizontal and verticle co-ordinates of the grid,
+	// the scale value is to make it so that we dont just get 1-height in the loops.
 	public static float[,] GenerateNoiseMap(int Width, int Height, int Seed, float Scale, int Octaves, float Persistance, float Lacunarity, Vector2 Offset, NormalizeMode normalizeMode) {
+		//new 2d array with the sizes height and width.
 		float[,] PerlinNoise = new float[Width,Height];
 
 		System.Random prng = new System.Random (Seed);
@@ -23,9 +30,9 @@ public static class Noise {
 			maxPossibleHeight += amplitude;
 			amplitude *= Persistance;
 		}
-
+		//if scale is 0 we would get a division by 1 error so we need to make sure its just slightly more than 0
 		if (Scale <= 0) {
-			Scale = 0.0001f;
+			Scale = 0.00000001f;
 		}
 
 		float maxLocalNoiseHeight = float.MinValue;
@@ -34,7 +41,8 @@ public static class Noise {
 		float halfWidth = Width / 2f;
 		float halfHeight = Height / 2f;
 
-
+		// this is the actual script that makes the  noisemap.
+		// as its a 2d co-ordinate system we use the x and y co-ordinates as the square that we are at. 
 		for (int y = 0; y < Height; y++) {
 			for (int x = 0; x < Width; x++) {
 
@@ -43,9 +51,12 @@ public static class Noise {
 				float noiseHeight = 0;
 
 				for (int i = 0; i < Octaves; i++) {
+					//here without the scale it would just be the integers for x and y and not a float
 					float sampleX = (x-halfWidth + octaveOffsets[i].x) / Scale * frequency;
 					float sampleY = (y-halfHeight + octaveOffsets[i].y) / Scale * frequency;
-
+					
+					// this uses the perlin noise function from mathf, and creates the noise at that square using 
+					// the calculated value for x above and the calculated value for y.
 					float PerlinNoiseAmmount = Mathf.PerlinNoise (sampleX, sampleY) * 2 - 1;
 					noiseHeight += PerlinNoiseAmmount * amplitude;
 
@@ -72,7 +83,7 @@ public static class Noise {
 				}
 			}
 		}
-
+		// this then passes the noise map to the function that called it.
 		return PerlinNoise;
 	}
 
