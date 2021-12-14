@@ -10,12 +10,12 @@ public class SkyGenEdit : Editor {
 
 		if (DrawDefaultInspector ()) {
 			if (skyGen.autoUpdate) {
-				skyGen.DrawMapInEditor ();
+				skyGen.CreateMapBasedOnSelection ();
 			}
 		}
 
 		if (GUILayout.Button ("Create")) {
-			skyGen.DrawMapInEditor ();
+			skyGen.CreateMapBasedOnSelection ();
 		}
 	}
 }

@@ -10,7 +10,7 @@ public class SkyGen : MonoBehaviour {
 	//this maxes out at 500 as anything more essentially grinds unity to a halt with 1fps
 	[Range(0,500)]
 	public const int SizeOfSky = 400;
-	public float noiseScale;
+	public float AmountOfNoise;
 	float OffsetUpdate=0;
 	public int Octaves;
 	[Range(0,1)]
@@ -25,7 +25,7 @@ public class SkyGen : MonoBehaviour {
 	public TerrainType[] regions;
 	
 	
-	public void DrawMapInEditor() {
+	public void CreateMapBasedOnSelection() {
 		SkyData skyData = GenerateSkyData (Vector2.zero);
 
 		AllDisplays Display = FindObjectOfType<AllDisplays> ();
@@ -37,7 +37,7 @@ public class SkyGen : MonoBehaviour {
 	}
 
 	SkyData GenerateSkyData(Vector2 centre) {
-		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfSky, SizeOfSky, Seed, noiseScale, Octaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
+		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfSky, SizeOfSky, Seed, AmountOfNoise, Octaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
 
 		Color[] SkyMap = new Color[SizeOfSky * SizeOfSky];
 		for (int y = 0; y < SizeOfSky; y++) {
@@ -77,7 +77,7 @@ public class SkyGen : MonoBehaviour {
 		Offset.Set(OffsetUpdate, 0);
 		if(frames%3==0)
 		{
-			DrawMapInEditor ();
+			CreateMapBasedOnSelection ();
 		}
     }
 }

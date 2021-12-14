@@ -44,8 +44,7 @@ public class MapGen : MonoBehaviour {
 		// this retrieves the noisemap from the noise.cs file using the inputted data of size, seed, noise, octaves, persistance, lacrunarity, offset and the way it is being normalized.
 		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfMap, SizeOfMap, Seed, noiseScale, Octaves, 
 														Persistance, Lacunarity, centre + Offset, normalizeMode);
-		//generate the colours for all of the pixels. 
-		//this is a 1d array as opposed to the perlin noise which is 2d.
+		//generate the colours for all of the pixels
 		Color[] WorldMap = new Color[SizeOfMap * SizeOfMap];
 		//again its a 2d array so this is the y co-ordinate
 		for (int y = 0; y < SizeOfMap; y++) {
@@ -56,8 +55,6 @@ public class MapGen : MonoBehaviour {
 				float CurrentHeight = PerlinNoise [x, y];
 				for (int i = 0; i < regions.Length; i++) {
 					if (CurrentHeight >= regions [i].Height) {
-						//here since its a 1d array to get the index by multiplying Y by the width of the map
-						// as it will give us the index of the row we are on, then add the x value(pixelnum on the x)
 						WorldMap [y * SizeOfMap + x] = regions [i].Color;
 					} else {
 						break;
