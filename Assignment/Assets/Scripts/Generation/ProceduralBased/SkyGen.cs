@@ -12,7 +12,7 @@ public class SkyGen : MonoBehaviour {
 	public const int SizeOfSky = 400;
 	public float AmountOfNoise;
 	float OffsetUpdate=0;
-	public int Octaves;
+	public int NumberOfOctaves;
 	[Range(0,1)]
 	public float Persistance;
 	public float Lacunarity;
@@ -25,7 +25,7 @@ public class SkyGen : MonoBehaviour {
 	public TerrainType[] regions;
 	
 	
-	public void CreateMapBasedOnSelection() {
+	public void CreateSkyBasedOnSelection() {
 		SkyData skyData = GenerateSkyData (Vector2.zero);
 
 		AllDisplays Display = FindObjectOfType<AllDisplays> ();
@@ -37,7 +37,7 @@ public class SkyGen : MonoBehaviour {
 	}
 
 	SkyData GenerateSkyData(Vector2 centre) {
-		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfSky, SizeOfSky, Seed, AmountOfNoise, Octaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
+		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfSky, SizeOfSky, Seed, AmountOfNoise, NumberOfOctaves, Persistance, Lacunarity, centre + Offset, normalizeMode);
 
 		Color[] SkyMap = new Color[SizeOfSky * SizeOfSky];
 		for (int y = 0; y < SizeOfSky; y++) {
@@ -61,8 +61,8 @@ public class SkyGen : MonoBehaviour {
 		if (Lacunarity < 1) {
 			Lacunarity = 1;
 		}
-		if (Octaves < 0) {
-			Octaves = 0;
+		if (NumberOfOctaves < 0) {
+			NumberOfOctaves = 0;
 		}
 		if (SpeedOfSky < 0) {
 			SpeedOfSky = 0;
@@ -77,7 +77,7 @@ public class SkyGen : MonoBehaviour {
 		Offset.Set(OffsetUpdate, 0);
 		if(frames%3==0)
 		{
-			CreateMapBasedOnSelection ();
+			CreateSkyBasedOnSelection ();
 		}
     }
 }

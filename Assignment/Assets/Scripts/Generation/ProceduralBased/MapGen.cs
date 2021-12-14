@@ -10,22 +10,21 @@ public class MapGen : MonoBehaviour {
 	public int SizeOfMap;
 
 	public float noiseScale;
-	public int Octaves;
-	[Range(0,1)]
-	public float Persistance;
+	public int NumberOfOctaves;
+	
+	
 	public float Lacunarity;
 	public int Seed;
 	public Vector2 Offset;
 	public float MeshHeightChanger;
+	[Range(0,1)]
+	public float Persistance;
 	public AnimationCurve MeshHeightCurveAmmount;
-	public bool autoUpdate;
+	public bool AutomaticallyUpdate;
 	public TerrainType[] regions;
 	float[,] falloffMap;
-	void Awake() {
-		falloffMap = FallOffMap.GenerateFalloffMap (SizeOfMap);
-	}
-
-	public void DrawMapInEditor() {
+	
+	public void UserSelectedDrawingStyle() {
 		MapData mapData = GenerateMapData (Vector2.zero);
 
 		AllDisplays display = FindObjectOfType<AllDisplays> ();
@@ -41,8 +40,9 @@ public class MapGen : MonoBehaviour {
 	}
 
 	MapData GenerateMapData(Vector2 centre) {
-		// this retrieves the noisemap from the noise.cs file using the inputted data of size, seed, noise, octaves, persistance, lacrunarity, offset and the way it is being normalized.
-		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfMap, SizeOfMap, Seed, noiseScale, Octaves, 
+		// this retrieves the noisemap from the noise.cs file using the inputted data of size, seed, noise, NumberOfOctaves, persistance, lacrunarity, offset and the way it is being normalized.
+		// these values are explained in the noise class in more detail, but the gist of it is each of them modifies the noise map in a unique way.
+		float[,] PerlinNoise = Noise.GenerateNoiseMap (SizeOfMap, SizeOfMap, Seed, noiseScale, NumberOfOctaves, 
 														Persistance, Lacunarity, centre + Offset, normalizeMode);
 		//generate the colours for all of the pixels
 		Color[] WorldMap = new Color[SizeOfMap * SizeOfMap];
@@ -71,14 +71,14 @@ public class MapGen : MonoBehaviour {
 		if (Lacunarity < 1) {
 			Lacunarity = 1;
 		}
-		if (Octaves < 0) {
-			Octaves = 0;
+		if (NumberOfOctaves < 0) {
+			NumberOfOctaves = 0;
 		}
 
 		falloffMap = FallOffMap.GenerateFalloffMap (SizeOfMap);
 	}
 	void Start(){
-		DrawMapInEditor ();
+		UserSelectedDrawingStyle ();
 	}
 		
 }
