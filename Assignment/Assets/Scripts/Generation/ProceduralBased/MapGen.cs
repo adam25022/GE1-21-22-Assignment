@@ -11,15 +11,17 @@ public class MapGen : MonoBehaviour {
 
 	public float noiseScale;
 	public int NumberOfOctaves;
-	
-	
 	public float Lacunarity;
+	// this generates new noisemaps based on the seed even if all other values are identicle.
 	public int Seed;
 	public Vector2 Offset;
 	public float MeshHeightChanger;
 	[Range(0,1)]
 	public float Persistance;
+	//curve map to set which sections of the map will be at which height, if its all 0 or all 1 it will just be a flat 2d picture, 
+	//varying the range to go upwards with flat zones in the middle gives a feel of a mountain
 	public AnimationCurve MeshHeightCurveAmmount;
+	// tickbox to automatically update the map
 	public bool AutomaticallyUpdate;
 	public TerrainType[] regions;
 	float[,] falloffMap;
@@ -52,6 +54,7 @@ public class MapGen : MonoBehaviour {
 			for (int x = 0; x < SizeOfMap; x++) {
 				// here we tell it to set all the pieces on the outside of the block to use the falloff map
 				PerlinNoise [x, y] = Mathf.Clamp01(PerlinNoise [x, y] - falloffMap [x, y]);
+				// the height at this point is equal to the value of the noisemap at them co-ordinates.
 				float CurrentHeight = PerlinNoise [x, y];
 				for (int i = 0; i < regions.Length; i++) {
 					if (CurrentHeight >= regions [i].Height) {
@@ -83,6 +86,8 @@ public class MapGen : MonoBehaviour {
 		
 }
 
+//this is the part where we pick the colour that will go in each section of the heightmap.
+//i.e. 0-2 is blue for water, 2-8 is green for grass, 8-10 is mountian.
 [System.Serializable]
 public struct TerrainType {
 	public string Name;

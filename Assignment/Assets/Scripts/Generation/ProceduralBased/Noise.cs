@@ -16,6 +16,7 @@ public static class Noise {
 		//new 2d array with the sizes height and width.
 		float[,] PerlinNoise = new float[Width,Height];
 
+		//this is the value for setting the seed. will return a procedural noisemap based on the seed.
 		System.Random prng = new System.Random (Seed);
 		Vector2[] octaveOffsets = new Vector2[NumberOfOctaves];
 
@@ -30,6 +31,7 @@ public static class Noise {
 		float halfWidth = Width / 2f;
 		float halfHeight = Height / 2f;
 
+		// this just sets it however much offset it has been set. if its above 100000 or below -100000 it just breaks so we limit that.
 		for (int i = 0; i < NumberOfOctaves; i++) {
 			float OffsetX = prng.Next (-100000, 100000) + Offset.x;
 			float OffsetY = prng.Next (-100000, 100000) - Offset.y;
