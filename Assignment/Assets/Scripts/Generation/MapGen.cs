@@ -28,15 +28,15 @@ public class MapGen : MonoBehaviour {
 	public void DrawMapInEditor() {
 		MapData mapData = GenerateMapData (Vector2.zero);
 
-		AllDisplays Display = FindObjectOfType<AllDisplays> ();
+		AllDisplays display = FindObjectOfType<AllDisplays> ();
 		if (drawMode == DrawMode.PerlinNoise) {
-			Display.CreateTexture (TextureGenerator.TextureFromHeightMap (mapData.heightMap));
+			display.CreateTexture (TextureGenerator.TextureFromHeightMap (mapData.heightMap));
 		} else if (drawMode == DrawMode.WorldMap) {
-			Display.CreateTexture (TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
+			display.CreateTexture (TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
 		} else if (drawMode == DrawMode.Mesh) {
-			Display.CreateMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, MeshHeightChanger, MeshHeightCurveAmmount), TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
+			display.CreateMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, MeshHeightChanger, MeshHeightCurveAmmount), TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
 		} else if (drawMode == DrawMode.FalloffMap) {
-			Display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(SizeOfMap)));
+			display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(SizeOfMap)));
 		}
 	}
 
