@@ -53,17 +53,17 @@
     <UnityVersion>2021.1.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Generation\Noise.cs" />
-    <Compile Include="Assets\Scripts\Generation\MapGen.cs" />
-    <Compile Include="Assets\Scripts\Generation\FallOffMap.cs" />
-    <Compile Include="Assets\Scripts\Generation\SkyGen.cs" />
+    <Compile Include="Assets\Scripts\Generation\ProceduralBased\Noise.cs" />
+    <Compile Include="Assets\Scripts\Generation\ProceduralBased\MapGen.cs" />
+    <Compile Include="Assets\Scripts\Generation\ProceduralBased\FallOffMap.cs" />
+    <Compile Include="Assets\Scripts\Generation\ProceduralBased\SkyGen.cs" />
+    <Compile Include="Assets\Scripts\Generation\AudioBased\InstantiateCubes.cs" />
     <Compile Include="Assets\Scripts\Movement\MouseLook.cs" />
-    <Compile Include="Assets\Scripts\Generation\AudioPeer.cs" />
+    <Compile Include="Assets\Scripts\Generation\AudioBased\AudioPeer.cs" />
     <Compile Include="Assets\Scripts\Movement\RigidbodyFirstPersonController.cs" />
-    <Compile Include="Assets\Scripts\Generation\TextureGenerator.cs" />
-    <Compile Include="Assets\Scripts\Generation\MeshGenetator.cs" />
-    <Compile Include="Assets\Scripts\Generation\AllDisplays.cs" />
-    <Compile Include="Assets\Scripts\Generation\InstantiateCubes.cs" />
+    <Compile Include="Assets\Scripts\Generation\ProceduralBased\MeshGenetator.cs" />
+    <Compile Include="Assets\Scripts\Generation\ProceduralBased\AllDisplays.cs" />
+    <Compile Include="Assets\Scripts\Generation\ProceduralBased\TextureGen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
