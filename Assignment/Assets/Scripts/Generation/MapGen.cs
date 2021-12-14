@@ -8,6 +8,7 @@ public class MapGen : MonoBehaviour {
 	public Noise.NormalizeMode normalizeMode;
 	
 	public int SizeOfMap;
+
 	public float noiseScale;
 	public int Octaves;
 	[Range(0,1)]
@@ -27,7 +28,7 @@ public class MapGen : MonoBehaviour {
 	public void DrawMapInEditor() {
 		MapData mapData = GenerateMapData (Vector2.zero);
 
-		Display Display = FindObjectOfType<Display> ();
+		AllDisplays Display = FindObjectOfType<AllDisplays> ();
 		if (drawMode == DrawMode.PerlinNoise) {
 			Display.CreateTexture (TextureGenerator.TextureFromHeightMap (mapData.heightMap));
 		} else if (drawMode == DrawMode.WorldMap) {

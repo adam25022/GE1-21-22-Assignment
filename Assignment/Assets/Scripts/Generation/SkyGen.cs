@@ -28,7 +28,7 @@ public class SkyGen : MonoBehaviour {
 	public void DrawMapInEditor() {
 		SkyData skyData = GenerateSkyData (Vector2.zero);
 
-		Display Display = FindObjectOfType<Display> ();
+		AllDisplays Display = FindObjectOfType<AllDisplays> ();
 		if (drawMode == DrawMode.PerlinNoise) {
 			Display.CreateTexture (TextureGenerator.TextureFromHeightMap (skyData.heightMap));
 		} else if (drawMode == DrawMode.SkyMap) {

@@ -10,15 +10,15 @@ public static class MeshGenerator {
 		int Height = heightMap.GetLength (1);
 		float topLeftX = (width - 1) / -2f;
 		float topLeftZ = (Height - 1) / 2f;
-
-
-		int verticesPerLine = (width - 1) ;
+		int levelOfDetail=0;
+		int MeshSimplification = (levelOfDetail == 0)?1:levelOfDetail * 2;
+		int verticesPerLine = (width - 1) / MeshSimplification + 1;
 
 		MeshData meshData = new MeshData (verticesPerLine, verticesPerLine);
 		int vertexIndex = 0;
 
-		for (int y = 0; y < Height; y ++) {
-			for (int x = 0; x < width; x ++) {
+		for (int y = 0; y < Height; y += MeshSimplification) {
+			for (int x = 0; x < width; x += MeshSimplification) {
 				meshData.vertices [vertexIndex] = new Vector3 (topLeftX + x, heightCurve.Evaluate (heightMap [x, y]) * heightMultiplier, topLeftZ - y);
 				meshData.uvs [vertexIndex] = new Vector2 (x / (float)width, y / (float)Height);
 
