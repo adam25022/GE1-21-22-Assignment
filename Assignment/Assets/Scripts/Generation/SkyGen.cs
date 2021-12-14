@@ -30,9 +30,9 @@ public class SkyGen : MonoBehaviour {
 
 		AllDisplays Display = FindObjectOfType<AllDisplays> ();
 		if (drawMode == DrawMode.PerlinNoise) {
-			Display.CreateTexture (TextureGenerator.TextureFromHeightMap (skyData.heightMap));
+			Display.CreateSkyTexture (TextureGenerator.TextureFromHeightMap (skyData.heightMap));
 		} else if (drawMode == DrawMode.SkyMap) {
-			Display.CreateTexture (TextureGenerator.TextureFromWorldMap (skyData.SkyMap, SizeOfSky, SizeOfSky));
+			Display.CreateSkyTexture (TextureGenerator.TextureFromWorldMap (skyData.SkyMap, SizeOfSky, SizeOfSky));
 		}
 	}
 

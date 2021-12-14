@@ -30,13 +30,13 @@ public class MapGen : MonoBehaviour {
 
 		AllDisplays display = FindObjectOfType<AllDisplays> ();
 		if (drawMode == DrawMode.PerlinNoise) {
-			display.CreateTexture (TextureGenerator.TextureFromHeightMap (mapData.heightMap));
+			display.CreateMapTexture (TextureGenerator.TextureFromHeightMap (mapData.heightMap));
 		} else if (drawMode == DrawMode.WorldMap) {
-			display.CreateTexture (TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
+			display.CreateMapTexture (TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
 		} else if (drawMode == DrawMode.Mesh) {
 			display.CreateMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, MeshHeightChanger, MeshHeightCurveAmmount), TextureGenerator.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
 		} else if (drawMode == DrawMode.FalloffMap) {
-			display.CreateTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(SizeOfMap)));
+			display.CreateMapTexture(TextureGenerator.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(SizeOfMap)));
 		}
 	}
 
