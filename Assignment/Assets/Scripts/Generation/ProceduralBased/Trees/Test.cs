@@ -13,10 +13,14 @@ public class Test : MonoBehaviour {
 
 	void OnValidate() {
 		points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectionSamples);
+		Draw();
 	}
 
 	void OnDrawGizmos() {
 		Gizmos.DrawWireCube(regionSize/2,regionSize);
+	}
+	void Draw() {
+		
 		if (points != null) {
 			foreach (Vector2 point in points) {
 				GameObject _instanceSampleCube = (GameObject)Instantiate (Tree);
