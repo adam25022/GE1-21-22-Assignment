@@ -19,7 +19,10 @@ public class Test : MonoBehaviour {
 		Gizmos.DrawWireCube(regionSize/2,regionSize);
 		if (points != null) {
 			foreach (Vector2 point in points) {
-				Gizmos.DrawSphere(point, displayRadius);
+				GameObject _instanceSampleCube = (GameObject)Instantiate (Tree);
+				_instanceSampleCube.transform.position = point;
+				_instanceSampleCube.transform.parent = this.transform;
+				_instanceSampleCube.name = "SampleTree"+point;
 			}
 		}
 	}
