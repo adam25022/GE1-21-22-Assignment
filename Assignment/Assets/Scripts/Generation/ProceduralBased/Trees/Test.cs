@@ -12,6 +12,7 @@ public class Test : MonoBehaviour {
 	List<Vector2> points;
 
 	void OnValidate() {
+		delete();
 		points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectionSamples);
 		Draw();
 	}
@@ -29,5 +30,15 @@ public class Test : MonoBehaviour {
 				_instanceSampleCube.name = "SampleTree"+point;
 			}
 		}
+	}
+	
+	void delete(){
+		UnityEditor.EditorApplication.delayCall+=()=>
+     	{
+          	foreach (Transform child in transform)
+			{
+				DestroyImmediate(child.gameObject);
+			}
+     	};
 	}
 }
