@@ -16,7 +16,12 @@ feature personally created audio
 implementing procedural tree creation
 
 # Instructions for use
+to use you just have to click play. once you do it will run with the currently configured settings and just work as is.
+if you wish to moddify the way in which everything is created and run you can use the different options to change them.
 ![MapGenControlls](Images/MapGeneratorControlls.PNG)
+![SkyGenControlls](SkyGeneratorControlls.PNG)
+![SoundHeightControlls](SoundHeightController.PNG)
+![TreeCreatorControlls](TreeCreator.PNG)
 # How it works
 
 # List of classes/assets in the project and whether made yourself or modified or if its from a source, please give the reference
