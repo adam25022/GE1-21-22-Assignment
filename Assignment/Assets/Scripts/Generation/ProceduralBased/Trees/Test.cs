@@ -6,11 +6,11 @@ public class Test : MonoBehaviour {
 	
 	public GameObject Tree;
 	public float radius = 1;
-	public Vector3 regionSize = Vector3.one;
+	public Vector2 regionSize = Vector2.one;
 	public int rejectionSamples = 30;
 	public float displayRadius =1;
 
-	List<Vector3> points;
+	List<Vector2> points;
 
 	void OnValidate() {
 		delete();
@@ -23,7 +23,7 @@ public class Test : MonoBehaviour {
 	void Draw() {
 		
 		if (points != null) {
-			foreach (Vector3 point in points) {
+			foreach (Vector2 point in points) {
 				GameObject _instanceSampleCube = (GameObject)Instantiate (Tree);
 				_instanceSampleCube.transform.position = point;
 				_instanceSampleCube.transform.parent = this.transform;
