@@ -8,24 +8,24 @@ public class SpawnTreeFromRaycast : MonoBehaviour
     public int treenum;
     public GameObject Tree;
 
-    int delay=0;
+    public int delay=20;
     
     // Start is called before the first frame update
     void Start()
     {  
-        if(delay<20)
-        {
-            Draw();     
-        }
         
     }
     
     // Update is called once per frame
     void Update()
     {
-        if(delay>20)
+        if(delay==1){
+            Draw();
+            delay--;
+        }
+        else if(delay>1)
         {
-            delay++;
+            delay--;
         }
     }
     // See Order of Execution for Event Functions for information on FixedUpdate() and Update() related to physics queries
