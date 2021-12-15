@@ -35,7 +35,7 @@ public class SpawnTreeFromRaycast : MonoBehaviour
         RaycastHit hit;
         for(int i=0;i<treenum;i++)
         {
-            Vector3 position = new Vector3(Random.Range(-1*(spawnsize), spawnsize), 0, Random.Range(-1*(spawnsize), spawnsize));
+            Vector3 position = new Vector3(Random.Range(-1*(spawnsize), spawnsize), 100, Random.Range(-1*(spawnsize), spawnsize));
             if (Physics.Raycast(position, Vector3.down, out hit))
             {
                     GameObject _instanceSampleTree = (GameObject)Instantiate (Tree);
