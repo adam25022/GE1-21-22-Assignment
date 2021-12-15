@@ -9,7 +9,7 @@ Class Group: TU856-4
 Video To Watch: [link](https://www.youtube.com/watch?v=PX4MiwkWo-I)
 
 # Description of the project
-The initial goal for my project was to procedurally generated Landmass/Island apropriately coloured with mountians and tree's with stuff in the sky and some audio. maybe some visuals in the distance, like a sound bar that moves to the music(stretch goal) that the player could walk around in. 
+The initial goal for my project was to procedurally generated Landmass/Island apropriately coloured with mountians and tree's with stuff in the sky and some audio. maybe some visuals in the distance, like a sound bar that moves to the music(stretch goal) that the player could walk around in. im glad to say that i achieved all of the things i wanted to do even the stetch goal
 
 goals:
 implementing perlin noise to procedurally generate the island terrain
@@ -25,6 +25,9 @@ if you wish to moddify the way in which everything is created and run you can us
 This project uses perlin noise maps to create height maps which is used for Terrain Chunk generation that creates a mesh that the player can walk on. you enter the colours of each of the different regions and then by setting the amount of noise, number of octaves, persistance, lacunarity, speed, height and height curve you can modify the map to your liking and make a ton of different terrain.
 I use a falloffmap as shown below to make the perimeter of the map water so that the landmass is now waterlocked.
 ![FallOffMap](Images/FallOffMap.PNG)
+
+There are also bars that move along to the intensity of the music of a particular point, this usually ends up with the lower end of the spectrum way higher than the higher end as theres way more bases and mids than high highs.
+
 
 ![MapGenControlls](Images/MapGeneratorControlls.PNG)Land Chunk Data Generator
 The above image is used to configure the land generation characteristics. We have the following parametres:
