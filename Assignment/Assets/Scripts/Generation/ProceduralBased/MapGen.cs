@@ -2,20 +2,27 @@
 using System.Collections;
 
 public class MapGen : MonoBehaviour {
-
+	// this is just the users choice list.
 	public enum DrawMode {PerlinNoise, WorldMap, Mesh, FalloffMap};
+	// this is where the user actually makes his choice.
 	public DrawMode drawMode;
+	// this is the normalization the user will chose to use
 	public Noise.NormalizeMode normalizeMode;
-	
+	// this is how big the map is.
 	public int SizeOfMap;
-
+	// Used to control the initial division of offset coordinates into a Perlin noisemap, this provides zoom.
 	public float noiseScale;
+	// number of layers of perlin noise.
 	public int NumberOfOctaves;
+	//this gives the perlin noise map a focus on overall terrain heights with each passing octave growing larger and larger focusing on finer details, improving your ability to emulate terrain
 	public float Lacunarity;
 	// this generates new noisemaps based on the seed even if all other values are identicle.
 	public int Seed;
+	// this is the offset of how far you want the noisemap to be from the center of the terrain.
 	public Vector2 Offset;
+	// this is how high you want the mesh to be.
 	public float MeshHeightChanger;
+	//What fraction of amplitude persists in each Octave. (0-1)
 	[Range(0,1)]
 	public float Persistance;
 	//curve map to set which sections of the map will be at which height, if its all 0 or all 1 it will just be a flat 2d picture, 
@@ -23,7 +30,9 @@ public class MapGen : MonoBehaviour {
 	public AnimationCurve MeshHeightCurveAmmount;
 	// tickbox to automatically update the map
 	public bool AutomaticallyUpdate;
+	// the colours of each of the region and at what height they are at.
 	public TerrainType[] regions;
+	// this is the falloffmap, every time this script validates it creates a new one.
 	float[,] falloffMap;
 	
 	public void UserSelectedDrawingStyle() {
@@ -76,7 +85,7 @@ public class MapGen : MonoBehaviour {
 
 		return new MapData (PerlinNoise, WorldMap);
 	}
-
+	// this just makes sure none of the values go out of bounds so that the program doesnt break.
 	void OnValidate() {
 		if (Lacunarity < 1) {
 			Lacunarity = 1;
@@ -84,10 +93,11 @@ public class MapGen : MonoBehaviour {
 		if (NumberOfOctaves < 0) {
 			NumberOfOctaves = 0;
 		}
-
+		//generates the fallout map into the variable.
 		falloffMap = FallOffMap.GenerateFalloffMap (SizeOfMap);
 	}
 	void Start(){
+		// draw the map when the program starts so theres not just an empty mesh
 		UserSelectedDrawingStyle ();
 	}
 		

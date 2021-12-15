@@ -21,6 +21,7 @@ public class AllDisplays : MonoBehaviour {
 	}
 
 	public void CreateMesh(MeshData Data, Texture2D texture) {
+		//this just uses the mesh data sent to create the mesh in and the, use the texture to apply the texture to the mesh
 		MapMeshFilter.sharedMesh = Data.CreateMesh ();
 		MapMeshRenderer.sharedMaterial.mainTexture = texture;
 	}
