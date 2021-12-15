@@ -28,6 +28,7 @@ I use a falloffmap as shown below to make the perimeter of the map water so that
 
 There are also bars that move along to the intensity of the music of a particular point, this usually ends up with the lower end of the spectrum way higher than the higher end as theres way more bases and mids than high highs.
 
+The first set of tree's were created using poisson distribution, but as that was creating problems with the y always being 0, i instead have now swapped to it being a raycast from heaven system where a ray comes from heaven, hits the mesh and creates the tree at the point.
 
 ![MapGenControlls](Images/MapGeneratorControlls.PNG)Land Chunk Data Generator
 The above image is used to configure the land generation characteristics. We have the following parametres:
