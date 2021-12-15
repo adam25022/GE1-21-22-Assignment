@@ -29,13 +29,21 @@ The above image is used to configure the land generation characteristics. We hav
 
 Noise Scale : Used to control the initial division of offset coordinates into a Perlin noisemap, this provides zoom.
 Number of Octaves: number of layers of perlin noise.
+
 Persistance: What fraction of amplitude persists in each Octave. (0-1)
+
 Lacunarity: this gives the perlin noise map a focus on overall terrain heights with each passing octave growing larger and larger focusing on finer details, improving your ability to emulate terrain
+
 Seed: A seed is used to give pseudo random generation to the perlin noisemap
+
 Offset: An offset can be applied to pick an initial coordinate the generation begins from on the noisemap.
+
 Height Changer: this is used to decide how high you want the peak sections to go.
+
 Mesh Height Map: this is used to decide the slopes you want to be modified by the height changer, if from 0-0.6 is set to a 0 on the height map there will be no change to the mesh between 0 and 0.6, and if you then change it all the way to 1 you will have block that goes straight up, and if you slope it up to 1 over time you will have cone like mountians.
+
 Terain Layers: Used for texture generation, a serializable struct definition for a terrain layer is written into Land Chunk Data Generatorm, containing a name string, height string and Color parametre. Heights are 0-1 to parse colour values from the initial parametre accordingly if the vertice value is higher than the layer.
+
 ![SkyGenControlls](Images/SkyGeneratorControlls.PNG)
 The above image is mostly the same as the map controlls except there is an option for how fast you want the sky to move, this is emulating windspeed.
 ![SoundHeightControlls](Images/SoundHeightController.PNG)
