@@ -57,9 +57,12 @@ public class MapGen : MonoBehaviour {
 				// the height at this point is equal to the value of the noisemap at them co-ordinates.
 				float CurrentHeight = PerlinNoise [x, y];
 				for (int i = 0; i < regions.Length; i++) {
+					//we have found the region that it falls between
 					if (CurrentHeight >= regions [i].Height) {
+						//color this section of the map the color for that region.
 						WorldMap [y * SizeOfMap + x] = regions [i].Color;
 					} else {
+						//if we cant find the colour that is atributed to this area break.
 						break;
 					}
 				}
