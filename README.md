@@ -20,6 +20,7 @@ implementing procedural tree creation
 # Instructions for use
 to use you just have to click play. once you do it will run with the currently configured settings and just work as is.
 if you wish to moddify the way in which everything is created and run you can use the different options to change them.
+if you want the circle of sound to go around the whole island as shown in the video and not just the spawn you need to set the scale to 11, 20, 11
 
 # How it works
 This project uses perlin noise maps to create height maps which is used for Terrain Chunk generation that creates a mesh that the player can walk on. you enter the colours of each of the different regions and then by setting the amount of noise, number of octaves, persistance, lacunarity, speed, height and height curve you can modify the map to your liking and make a ton of different terrain.
@@ -62,12 +63,12 @@ Treenum is the number of tree's to be spawned.
 Tree is the asset of the tree to be spawned
 Delay is the delay of the tree spawning from the game starting
 
-#Legacy Content!
+# Legacy Content!
 ![TreeCreatorControlls](Images/TreeCreator.PNG)
 Tree: this is the tree model that will be used in the world.
 Distance Between Tree's: this is the distance between the trees used in the poisson disc sampling
 Region Size: this is the size of area of tree's that will be used.
-##This was phased our as it only used an Y co-ordinate of 0 which lead to major clipping
+## This was phased our as it only used an Y co-ordinate of 0 which lead to major clipping
 
 # List of classes/assets in the project and whether made yourself or modified or if its from a source, please give the reference
 
