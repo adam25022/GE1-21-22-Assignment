@@ -58,10 +58,13 @@ Treenum is the number of tree's to be spawned.
 Tree is the asset of the tree to be spawned
 Delay is the delay of the tree spawning from the game starting
 
+#Legacy Content!
 ![TreeCreatorControlls](Images/TreeCreator.PNG)
 Tree: this is the tree model that will be used in the world.
 Distance Between Tree's: this is the distance between the trees used in the poisson disc sampling
 Region Size: this is the size of area of tree's that will be used.
+##This was phased our as it only used an Y co-ordinate of 0 which lead to major clipping
+
 # List of classes/assets in the project and whether made yourself or modified or if its from a source, please give the reference
 
 | Class/asset | Source |
