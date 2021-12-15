@@ -1,15 +1,22 @@
 # Project Title
 
-Name:
+Name: Adam Nolan	
 
-Student Number: 
+Student Number: C18363931	
 
-Class Group:
+Class Group: TU856-4
 
 # Description of the project
+The initial goal for my project was to procedurally generated Landmass/Island apropriately coloured with mountians and tree's with stuff in the sky and some audio. maybe some visuals in the distance, like a sound bar that moves to the music(stretch goal) that the player could walk around in. 
+
+goals:
+implementing perlin noise to procedurally generate the island terrain
+allow a person to use Unity Editor to generate new and unique islands
+feature personally created audio
+implementing procedural tree creation
 
 # Instructions for use
-
+![MapGenControlls](Images/MapGeneratorControlls.PNG)
 # How it works
 
 # List of classes/assets in the project and whether made yourself or modified or if its from a source, please give the reference
