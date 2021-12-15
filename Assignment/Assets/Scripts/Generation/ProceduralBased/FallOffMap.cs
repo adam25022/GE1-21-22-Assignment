@@ -24,7 +24,7 @@ public static class FallOffMap {
 		//this returns the completed map.
 		return FallOfMap;
 	}
-
+	// this is to make it so that the majority of the map is not water, but instead the majority of the map is land
 	static float Evaluate(float value) {
 		float a = 3;
 		float b = 2.2f;
