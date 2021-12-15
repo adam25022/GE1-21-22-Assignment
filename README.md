@@ -6,6 +6,8 @@ Student Number: C18363931
 
 Class Group: TU856-4
 
+Video To Watch: [link](https://www.youtube.com/watch?v=PX4MiwkWo-I)
+
 # Description of the project
 The initial goal for my project was to procedurally generated Landmass/Island apropriately coloured with mountians and tree's with stuff in the sky and some audio. maybe some visuals in the distance, like a sound bar that moves to the music(stretch goal) that the player could walk around in. 
 
