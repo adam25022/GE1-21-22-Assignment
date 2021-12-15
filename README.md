@@ -19,11 +19,20 @@ implementing procedural tree creation
 to use you just have to click play. once you do it will run with the currently configured settings and just work as is.
 if you wish to moddify the way in which everything is created and run you can use the different options to change them.
 
-![MapGenControlls](Images/MapGeneratorControlls.PNG)
-![SkyGenControlls](Images/SkyGeneratorControlls.PNG)
-![SoundHeightControlls](Images/SoundHeightController.PNG)
-![TreeCreatorControlls](Images/TreeCreator.PNG)
 # How it works
+This project uses perlin noise maps to create height maps which is used for Terrain Chunk generation that creates a mesh that the player can walk on. you enter the colours of each of the different regions and then by setting the amount of noise, number of octaves, persistance, lacunarity, speed, height and height curve you can modify the map to your liking and make a ton of different terrain.
+I use a falloffmap as shown below to make the perimeter of the map water so that the landmass is now waterlocked.
+![FallOffMap](Images/FallOffMap.PNG)
+
+![MapGenControlls](Images/MapGeneratorControlls.PNG)Land Chunk Data Generator
+The above image is used to configure the land generation characteristics. We have the following parametres:
+
+Noise Scale : Used to control the initial division of offset coordinates into a Perlin noisemap, this provides zoom.
+Number of Octaves: number of layers of perlin noise.
+Persistance: What fraction of amplitude persists in each Octave. (0-1)
+Lacunarity: this gives the perlin noise map a focus on overall terrain heights with each passing octave growing larger and larger focusing on finer details, improving your ability to emulate terrain
+Seed: A seed is used to give pseudo random generation to the perlin noisemap
+Offset: An offset can be applied to pick an initial coordinate the generation begins from on the noisemap.
 
 # List of classes/assets in the project and whether made yourself or modified or if its from a source, please give the reference
 
@@ -56,71 +65,4 @@ if you wish to moddify the way in which everything is created and run you can us
 That I finsished it.
 # Proposal submitted earlier can go here:
 Procedurally generated Landmass/Island apropriately coloured with mountians and tree's with stuff in the sky and some audio ill get mixed. maybe some visuals in the distance, like a sound bar that moves to the music(stretch goal)
-## This is how to markdown text:
-
-This is *emphasis*
-
-This is a bulleted list
-
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
-This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
-
-This is a youtube video:
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
 
