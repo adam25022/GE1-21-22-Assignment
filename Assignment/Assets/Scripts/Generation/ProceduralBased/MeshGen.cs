@@ -23,8 +23,13 @@ public static class MeshGen {
 			for (int x = 0; x < Width; x += MeshSimplification) {
 
 				meshData.vertices [vertexIndex] = new Vector3 (topLeftX + x, heightCurve.Evaluate (heightMap [x, y]) * heightMultiplier, topLeftZ - y);
+				//this to tell the vertices to tell it where it is in relation to the rest of the map. between 0 and 1
 				meshData.uvs [vertexIndex] = new Vector2 (x / (float)Width, y / (float)Height);
-
+				// we will be looping through the map, so if were at vertex 1 we willb e setting both of the triangles in the squares attached.
+				// if there are any vertices that arent attached to a uncompleted triangle you skip them
+				// its a 2d grid, so if in the first row you just iave i, then i+1, in the next row you would have i+w, i+w+1,
+				// as its a square(2x2 grid, 2x2=4 sides, object with 4 equal distnacesides is a square), 2 triangles
+				// this means that the first triangle will go from i, i+w+1, i+w and the second triangle will go from i+w1, i, i+1
 				if (x < Width - 1 && y < Height - 1) {
 					meshData.AddTriangle (vertexIndex, vertexIndex + verticesPerLine + 1, vertexIndex + verticesPerLine);
 					meshData.AddTriangle (vertexIndex + verticesPerLine + 1, vertexIndex, vertexIndex + 1);
@@ -43,6 +48,7 @@ public class MeshData {
 	// these are the vertices and triangles we are going to be using to create the mesh.
 	public Vector3[] vertices;
 	public int[] triangles;
+	//this is a vector 2 array for each of the vertices to tell it where it is in relation to the rest of the map. between 0 and 1
 	public Vector2[] uvs;
 
 	int triangleIndex;
@@ -63,12 +69,13 @@ public class MeshData {
 		triangles [triangleIndex + 2] = c;
 		triangleIndex += 3;
 	}
-
+	// this uses the mesh data to actually create the mesh. it uses the vertices and the triangles and uv's and calculates the normals.
 	public Mesh CreateMesh() {
 		Mesh mesh = new Mesh ();
 		mesh.vertices = vertices;
 		mesh.triangles = triangles;
 		mesh.uv = uvs;
+		// calcualting the normals is just so lighting doesnt bug out.
 		mesh.RecalculateNormals ();
 		return mesh;
 	}

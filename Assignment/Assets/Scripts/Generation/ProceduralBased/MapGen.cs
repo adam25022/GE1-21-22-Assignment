@@ -28,14 +28,18 @@ public class MapGen : MonoBehaviour {
 	
 	public void UserSelectedDrawingStyle() {
 		MapData mapData = GenerateMapData (Vector2.zero);
-
+		//this is the user selection options, the user can shose what he wants to do in this section and then dispalys it
 		AllDisplays display = FindObjectOfType<AllDisplays> ();
+		//in this the user has chosen to create a perlin noisemap 
 		if (drawMode == DrawMode.PerlinNoise) {
 			display.CreateMapTexture (TextureGen.TextureFromHeightMap (mapData.heightMap));
+		//here the user has chosen to create a coloured worldmap
 		} else if (drawMode == DrawMode.WorldMap) {
 			display.CreateMapTexture (TextureGen.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
+		//here the user has chosen to create a mesh of the map. 
 		} else if (drawMode == DrawMode.Mesh) {
 			display.CreateMesh (MeshGen.GenerateTerrainMesh (mapData.heightMap, MeshHeightChanger, MeshHeightCurveAmmount), TextureGen.TextureFromWorldMap (mapData.WorldMap, SizeOfMap, SizeOfMap));
+			//here the user has chosen to display the falloffmap that is being used to filter all the other maps.
 		} else if (drawMode == DrawMode.FalloffMap) {
 			display.CreateMapTexture(TextureGen.TextureFromHeightMap(FallOffMap.GenerateFalloffMap(SizeOfMap)));
 		}
