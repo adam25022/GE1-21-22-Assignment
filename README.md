@@ -55,7 +55,7 @@ if you wish to moddify the way in which everything is created and run you can us
 # What I am most proud of in the assignment
 That I finsished it.
 # Proposal submitted earlier can go here:
-
+Procedurally generated Landmass/Island apropriately coloured with mountians and tree's with stuff in the sky and some audio ill get mixed. maybe some visuals in the distance, like a sound bar that moves to the music(stretch goal)
 ## This is how to markdown text:
 
 This is *emphasis*
