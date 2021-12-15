@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Generation\ProceduralBased\TextureGen.cs" />
     <Compile Include="Assets\Scripts\Generation\ProceduralBased\AllDisplays.cs" />
     <Compile Include="Assets\Scripts\Generation\ProceduralBased\Trees\PoissonDiscSampling.cs" />
+    <Compile Include="Assets\Scripts\Generation\ProceduralBased\Trees\SpawnTreeFromRaycast.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
