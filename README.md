@@ -80,10 +80,10 @@ Region Size: this is the size of area of tree's that will be used.
 | TextureGen.cs | Modified from [Sebastian Lague's Terrain Generation Tutorial Series EP 1-11 (https://www.youtube.com/watch?v=wbpMiKiSKm8&list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) |
 | AudioPeer.cs | Modified From [Peer Play- Audio Visualization playlist](https://www.youtube.com/watch?v=5pmoP1ZOoNs&list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo&ab_channel=PeerPlay)|
 | InstantiateCubes.cs | From [Peer Play- Audio Visualization playlist](https://www.youtube.com/watch?v=5pmoP1ZOoNs&list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo&ab_channel=PeerPlay) |
-| PoissonDiscSampling.cs | From [reference](https://www.youtube.com/watch?v=7WcmyxyFO7o&ab_channel=SebastianLague) |
-| TreeCreator.cs | Modified from [reference](https://www.youtube.com/watch?v=7WcmyxyFO7o&ab_channel=SebastianLague) |
-| RigidbodyFirstPersonController.cs | From [reference](https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2018-4-32351) |
-| MouseLook.cs | From [reference](https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2018-4-32351) |
+| PoissonDiscSampling.cs | From [Sebastian League's poisson disk tutorial](https://www.youtube.com/watch?v=7WcmyxyFO7o&ab_channel=SebastianLague) |
+| TreeCreator.cs | Modified from [Sebastian League's poisson disk tutorial](https://www.youtube.com/watch?v=7WcmyxyFO7o&ab_channel=SebastianLague) |
+| RigidbodyFirstPersonController.cs | From [Unity Legacy Character Content](https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2018-4-32351) |
+| MouseLook.cs | From [Unity Legacy Character Content](https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2018-4-32351) |
 | handcreatedleaf.png | Self Created |
 | Mix No1.wav | Self Created |
 | SpawnTreeFromRaycast.cs | Self Created |
