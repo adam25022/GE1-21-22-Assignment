@@ -11,7 +11,7 @@ public class Test : MonoBehaviour {
 	public float displayRadius =1;
 
 	List<Vector2> points;
-
+	Vector3 treevector;
 	void OnValidate() {
 		delete();
 		points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectionSamples);
@@ -24,10 +24,11 @@ public class Test : MonoBehaviour {
 		
 		if (points != null) {
 			foreach (Vector2 point in points) {
+				treevector.Set(point.x, 0, point.y);
 				GameObject _instanceSampleCube = (GameObject)Instantiate (Tree);
-				_instanceSampleCube.transform.position = point;
+				_instanceSampleCube.transform.position = treevector;
 				_instanceSampleCube.transform.parent = this.transform;
-				_instanceSampleCube.name = "SampleTree"+point;
+				_instanceSampleCube.name = "SampleTree"+treevector;
 			}
 		}
 	}
