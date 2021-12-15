@@ -29,13 +29,21 @@ The above image is used to configure the land generation characteristics. We hav
 
 Noise Scale : Used to control the initial division of offset coordinates into a Perlin noisemap, this provides zoom.
 Number of Octaves: number of layers of perlin noise.
+
 Persistance: What fraction of amplitude persists in each Octave. (0-1)
+
 Lacunarity: this gives the perlin noise map a focus on overall terrain heights with each passing octave growing larger and larger focusing on finer details, improving your ability to emulate terrain
+
 Seed: A seed is used to give pseudo random generation to the perlin noisemap
+
 Offset: An offset can be applied to pick an initial coordinate the generation begins from on the noisemap.
+
 Height Changer: this is used to decide how high you want the peak sections to go.
+
 Mesh Height Map: this is used to decide the slopes you want to be modified by the height changer, if from 0-0.6 is set to a 0 on the height map there will be no change to the mesh between 0 and 0.6, and if you then change it all the way to 1 you will have block that goes straight up, and if you slope it up to 1 over time you will have cone like mountians.
+
 Terain Layers: Used for texture generation, a serializable struct definition for a terrain layer is written into Land Chunk Data Generatorm, containing a name string, height string and Color parametre. Heights are 0-1 to parse colour values from the initial parametre accordingly if the vertice value is higher than the layer.
+
 ![SkyGenControlls](Images/SkyGeneratorControlls.PNG)
 The above image is mostly the same as the map controlls except there is an option for how fast you want the sky to move, this is emulating windspeed.
 ![SoundHeightControlls](Images/SoundHeightController.PNG)
@@ -58,7 +66,7 @@ Region Size: this is the size of area of tree's that will be used.
 | SkyGen.cs | Modified from [Sebastian Lague's Terrain Generation Tutorial Series EP 1-11 (https://www.youtube.com/watch?v=wbpMiKiSKm8&list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) |
 | TextureGen.cs | Modified from [Sebastian Lague's Terrain Generation Tutorial Series EP 1-11 (https://www.youtube.com/watch?v=wbpMiKiSKm8&list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3) |
 | AudioPeer.cs | Modified From [Peer Play- Audio Visualization playlist](https://www.youtube.com/watch?v=5pmoP1ZOoNs&list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo&ab_channel=PeerPlay)|
-| InstantiateCubes.cs | Modified From [Peer Play- Audio Visualization playlist](https://www.youtube.com/watch?v=5pmoP1ZOoNs&list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo&ab_channel=PeerPlay) |
+| InstantiateCubes.cs | From [Peer Play- Audio Visualization playlist](https://www.youtube.com/watch?v=5pmoP1ZOoNs&list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo&ab_channel=PeerPlay) |
 | PoissonDiscSampling.cs | From [reference](https://www.youtube.com/watch?v=7WcmyxyFO7o&ab_channel=SebastianLague) |
 | TreeCreator.cs | Modified from [reference](https://www.youtube.com/watch?v=7WcmyxyFO7o&ab_channel=SebastianLague) |
 | RigidbodyFirstPersonController.cs | From [reference](https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2018-4-32351) |
@@ -72,7 +80,7 @@ Region Size: this is the size of area of tree's that will be used.
 [Peer Play's Audio Visualisation] https://www.youtube.com/playlist?list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo
 [unities legacy character movement scripts] https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2018-4-32351
 # What I am most proud of in the assignment
-That I finsished it.
+That I finsished it and actually got to 80 commits(said at commit 64, hope it ages well).
 # Proposal submitted earlier can go here:
 Procedurally generated Landmass/Island apropriately coloured with mountians and tree's with stuff in the sky and some audio ill get mixed. maybe some visuals in the distance, like a sound bar that moves to the music(stretch goal)
 
