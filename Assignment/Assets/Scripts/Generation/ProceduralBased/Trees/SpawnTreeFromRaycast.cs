@@ -19,32 +19,37 @@ public class SpawnTreeFromRaycast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if the delay has been reached draw the tree's
         if(delay==1){
             Draw();
+            //remove the delay so it doesnt keep drawing
             delay--;
-        }
+        }//count down from the requested delay till it draws.
         else if(delay>1)
         {
             delay--;
         }
     }
-    // See Order of Execution for Event Functions for information on FixedUpdate() and Update() related to physics queries
     void Draw()
     {   
-
+        //create the raycast hit
         RaycastHit hit;
+        //create a tree until you reach the number of tree's requested
         for(int i=0;i<treenum;i++)
         {
+            //get a random position in the chosen range and send a ray straight down from heaven to hit the ground.
             Vector3 position = new Vector3(Random.Range(-1*(spawnsize), spawnsize), 100, Random.Range(-1*(spawnsize), spawnsize));
+            //if the ray hits the ground
             if (Physics.Raycast(position, Vector3.down, out hit))
-            {
-                    GameObject _instanceSampleTree = (GameObject)Instantiate (Tree);
-                    //move the position of the tree
-                    _instanceSampleTree.transform.position = hit.point;
-                    //set the tree in relation to the parent
-                    _instanceSampleTree.transform.parent = this.transform;
-                    // name the tree, using the vector as a unique identifier as its good practice not to have them all the same name.
-                    _instanceSampleTree.name = "SampleTree"+i;
+            {   
+                //create the tree object.
+                GameObject _instanceSampleTree = (GameObject)Instantiate (Tree);
+                //move the position of the tree
+                _instanceSampleTree.transform.position = hit.point;
+                //set the tree in relation to the parent
+                _instanceSampleTree.transform.parent = this.transform;
+                // name the tree, using the vector as a unique identifier as its good practice not to have them all the same name.
+                _instanceSampleTree.name = "SampleTree"+i;
             }
         }
     }
