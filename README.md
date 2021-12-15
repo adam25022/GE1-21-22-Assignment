@@ -46,9 +46,15 @@ Terain Layers: Used for texture generation, a serializable struct definition for
 
 ![SkyGenControlls](Images/SkyGeneratorControlls.PNG)
 The above image is mostly the same as the map controlls except there is an option for how fast you want the sky to move, this is emulating windspeed.
+
 ![SoundHeightControlls](Images/SoundHeightController.PNG)
 this is how high the sound meters that move along to the song that is played in the background move.
+
 ![SpawnTreeFromRaycast](Images/SpawnTreeFromRaycast.PNG)
+Here the spawnsize is the area in which the tree's are allowed to spawn ranging from -spawnsize to +spawnsize on the x and z co-ordinates.
+Treenum is the number of tree's to be spawned.
+Tree is the asset of the tree to be spawned
+Delay is the delay of the tree spawning from the game starting
 
 ![TreeCreatorControlls](Images/TreeCreator.PNG)
 Tree: this is the tree model that will be used in the world.
